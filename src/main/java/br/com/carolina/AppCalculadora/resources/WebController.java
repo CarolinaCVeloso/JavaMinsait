@@ -14,26 +14,29 @@ public class WebController {
     @GetMapping("/")
     public String showForm(Model model){
         // Adicionar lista de operações
-        model.addAttribute("modelOperacoes", List.of("Soma", "Subtracao"));
+        model.addAttribute("modelOperacoes", List.of("Soma", "Subtracao", "Divisão"));
         return "form";
     }
 
     @PostMapping("/")
-    public String handleFormSubmission(@RequestParam String modelOperacao,
+    public String handleFormSubmission(@RequestParam String modelOperacoes,
                                        @RequestParam String valor01,
                                        @RequestParam String valor02,
                                        Model model){
-        if (modelOperacao.isEmpty() || valor01.isEmpty() || valor02.isEmpty())
+        if (modelOperacoes.isEmpty() || valor01.isEmpty() || valor02.isEmpty())
             return null;
 
         String resposta = "";
         int resp = 0;
-        switch (modelOperacao){
+        switch (modelOperacoes){
             case "Soma":
                resp = Integer.parseInt(valor01) + Integer.parseInt(valor02);
                break;
             case "Subtracao":
                 resp = Integer.parseInt(valor01) - Integer.parseInt(valor02);
+                break;
+            case "Divisão":
+                resp = Integer.parseInt(valor01) / Integer.parseInt(valor02);
                 break;
         }
         resposta = String.valueOf(resp);
@@ -41,7 +44,7 @@ public class WebController {
         //devolver resposta para tela
         model.addAttribute("modelOperacoes", List.of("Soma", "Subtracao" ));
         model.addAttribute("response", resposta);
-        model.addAttribute("selectedModel", modelOperacao);
+        model.addAttribute("selectedModel", modelOperacoes);
         return "form";
     }
 }
