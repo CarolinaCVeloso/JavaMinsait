@@ -4,31 +4,34 @@
         <title>Aplicação Calculadora Spring</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- CSS do Bootstrap -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+              rel="stylesheet">
+
     </head>
     <body>
-        <div>
+        <div class="container mt-5">
             <form action="#" th:action="@{/}" method="post" id="operacaoForm">
-                <div>
+                <div class="form-group">
                     <label for="modelOperacoes">Selecione a operação:</label>
-                    <select id="modelOperacoes" name="modelOperacoes">
+                    <select id="modelOperacoes" name="modelOperacoes" class="form-control">
                         <option th:each="operacao: ${modelOperacoes}"
                                 th:value="${operacao}"
                                 th:text="${operacao}"
                                 th:selected="${operacao == selectedModel}">
-                                Operação
                         </option>
                     </select>
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="valor01">Valor 01</label>
-                    <input id="valor01" name="valor01" type="text">
+                    <input id="valor01" name="valor01" type="text" class="form-control">
                 </div>
-                <div>
+                <div class="form-group">
                     <label for="valor02">Valor 02</label>
-                    <input id="valor02" name="valor02" type="text">
+                    <input id="valor02" name="valor02" type="text" class="form-control">
                 </div>
                 <div>
-                    <button type="submit" id="submitBtn">Calcular</button>
+                    <button type="submit" id="submitBtn" class="btn btn-primary">Calcular</button>
                 </div>
             </form>
            <!------Resposta----->
@@ -37,5 +40,9 @@
                 <span th:text="${response}"></span>
             </div>
         </div>
+
+        <!-- JavaScript do Bootstrap e dependências -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
     </body>
 </html>
